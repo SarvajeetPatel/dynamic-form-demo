@@ -5,29 +5,27 @@ import { validationSchema } from '../components/validationSchema'
 
 const MainForm = () => {
     let initials = {}
-    InputFields.map((tempField) => {
-        if (tempField.type === 'checkbox') {
-            initials[tempField.name] = []
-        } else {
-            initials[tempField.name] = ''
-        }
-        return true
-    })
+    InputFields.map((tempField) =>
+        initials[tempField.name] = (tempField.type === 'checkbox') ? [] : ''
+    )
 
     const { values, handleChange, handleSubmit, errors, handleReset, touched } = useFormik({
         initialValues: initials,
         onSubmit: (values) => {
             if (Object.keys(errors).filter(err => errors[err]).length === 0) {
+                let existingData = JSON.parse(localStorage.getItem('dummy details')) || []
+                existingData.push(values)
+                localStorage.setItem('dummy details', JSON.stringify(existingData))
                 handleReset()
             }
             console.log(values)
         },
         validationSchema: validationSchema
     })
-
+    
     return (
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 {InputFields.map((ipField, fieldIndex) => (
                     (ipField.type === 'checkbox' || ipField.type === 'radio') ?
                         <div> {ipField.name} &nbsp;
@@ -40,6 +38,7 @@ const MainForm = () => {
                                         name={ipField.name}
                                         placeholder={ipField.placeholder}
                                         onChange={handleChange}
+                                        checked={values?.[ipField.name].includes(tempOptions)}
                                     />
                                     {tempOptions}
                                 </label>
@@ -57,8 +56,7 @@ const MainForm = () => {
                                     onChange={handleChange}
                                     defaultValue=''
                                 >
-
-                                    <option value='' disabled={true}> Select Option </option>
+                                    <option value='' selected={values[ipField?.name] === ''} disabled={true}> Select Option </option>
 
                                     {ipField?.options?.map((tempOptions, optionIndex) => (
                                         <option key={optionIndex} value={tempOptions} selected={tempOptions === values[ipField.name]}> {tempOptions} </option>
@@ -87,7 +85,7 @@ const MainForm = () => {
                         )
 
                 ))}
-                <button type='button' onClick={() => handleSubmit()}> SUBMIT </button>
+                <button type='submit'> SUBMIT </button>
             </form >
         </>
     )
