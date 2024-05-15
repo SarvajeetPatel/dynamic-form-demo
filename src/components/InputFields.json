@@ -1,0 +1,50 @@
+[
+    {
+        "name": "field_1",
+        "type": "text",
+        "placeholder": "Field 1",
+        "required": true
+    },
+    {
+        "name": "field_2",
+        "type": "select",
+        "placeholder": "Field 2",
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+    },
+    {
+        "name": "field_3",
+        "type": "checkbox",
+        "placeholder": "Field 3",
+        "list": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ],
+        "required": true
+    },
+    {
+        "name": "field_4",
+        "type": "radio",
+        "placeholder": "Field 4",
+        "list": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+    },
+    {
+        "name": "field_5",
+        "type": "select",
+        "placeholder": "Field 5",
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ],
+        "required": true
+    }
+]
