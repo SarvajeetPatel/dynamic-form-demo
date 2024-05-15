@@ -22,7 +22,7 @@ const MainForm = () => {
         },
         validationSchema: validationSchema
     })
-    
+
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -59,7 +59,12 @@ const MainForm = () => {
                                     <option value='' selected={values[ipField?.name] === ''} disabled={true}> Select Option </option>
 
                                     {ipField?.options?.map((tempOptions, optionIndex) => (
-                                        <option key={optionIndex} value={tempOptions} selected={tempOptions === values[ipField.name]}> {tempOptions} </option>
+                                        <option
+                                            key={optionIndex}
+                                            value={tempOptions}
+                                            selected={tempOptions === values[ipField.name]}
+                                        >
+                                            {tempOptions} </option>
                                     ))}
 
                                 </select>
@@ -83,7 +88,6 @@ const MainForm = () => {
                                 </div>
                             </div>
                         )
-
                 ))}
                 <button type='submit'> SUBMIT </button>
             </form >
